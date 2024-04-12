@@ -1,20 +1,10 @@
 import React from 'react'
-import NavBar from './dashboard/navbar'
-import Container from 'react-bootstrap/Container'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
-import './dashboard/style.css'
+import { useLocalStorage } from '../hooks/useLocalStorage';
 
 const Home = () => {
+    const { getItem } = useLocalStorage();
     return (
-        <Container className='container_nav'>
-            <Row className='row_nav'>
-                <Col sm={2}>
-                    <NavBar></NavBar>
-                </Col>
-                <Col sm={10}><h3>hola mundo</h3></Col>
-            </Row>            
-        </Container>
+        <h3>hola mundo {getItem('username')}</h3>
     )
 };
 

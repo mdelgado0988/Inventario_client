@@ -34,7 +34,8 @@ function Login(){
         // console.log(username);
         // console.log(uniqueid);
 
-        setAuth({ username, uniqueid, token });
+        localStorage.setItem('user', JSON.stringify({ username: username, uniqueid: uniqueid, accessToken: token}));
+        setAuth({ username: username, uniqueid: uniqueid, accessToken: token });
         Navigate(from, { replace: true });
 
     };
