@@ -1,38 +1,47 @@
 import React from 'react'
 import { useEffect, useState } from 'react'
-import submitGET from '../api/submitGet';
+import useAxiosPrivate from '../hooks/useAxiosPrivate';
 
 const Usuarios = () => {
     const [usuarios, setUsuarios] = useState();
 
+    const axios = useAxiosPrivate();
+
     useEffect(() => {
-        let isMouted = true;
+        let isMounted = true;
         const controller = new AbortController();
 
         const getUsuarios = async () => {
+            try{
+            
+                const response = await axios.get('/usuario', {
+                    signal: controller.signal
+                });
 
-            const response = await submitGET('/usuario', {
-                signal: controller.signal
-            });
+                console.log(response.data.data);
+                isMounted && setUsuarios(response.data.data);
 
-            console.log(response.data);
-            isMouted && setUsuarios(response.data);
+            }catch(error){
+                console.log(`Error leyendo usuarios: ${error}`);
+            }
 
         };
 
         getUsuarios();
 
         return () => {
-            isMouted = false;
+            isMounted = false;
             controller.abort();
         };
 
-    });
+    },[]);
+
+    console.log(usuarios);
 
     return (
         <article>
             <h2>Usuarios</h2>
-            {usuarios?.lenght
+            {usuarios?.length
                 ? (
                     <ul>
                         {usuarios.map((usuario, i) => <li key={i}>{usuario?.username}</li>)}

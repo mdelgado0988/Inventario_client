@@ -6,16 +6,21 @@ const RequireAuth = () => {
     const { auth } = useAuth();
     const location = useLocation();
     let username = useState('');
+    let uniqueid = useState('');
 
     if(auth?.username){
-        localStorage.setItem('username', auth?.username);
+        console.log('tiene');
+        localStorage.setItem('user', auth?.username);
+        localStorage.setItem('uniqueid', auth?.uniqueid);
     }
 
-    if(localStorage.getItem('username')){
-        username = localStorage.getItem('username');
+    if(localStorage.getItem('user')){
+        username = localStorage.getItem('user');
+        uniqueid = localStorage.getItem('uniqueid');
     }
 
-    console.log(username);
+    // console.log(username);
+    // console.log(uniqueid);
 
     return (      
         username

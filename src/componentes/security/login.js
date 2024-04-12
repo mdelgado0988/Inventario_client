@@ -28,11 +28,13 @@ function Login(){
 
         const token = response?.data?.data?.accessToken;
         const username = response?.data?.data?.username;
+        const uniqueid = response?.data?.data?.uniqueid;
 
-        console.log(token);
-        console.log(username);
+        // console.log(token);
+        // console.log(username);
+        // console.log(uniqueid);
 
-        setAuth({ username, token });
+        setAuth({ username, uniqueid, token });
         Navigate(from, { replace: true });
 
     };
